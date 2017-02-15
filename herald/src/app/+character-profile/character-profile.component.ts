@@ -30,5 +30,4 @@ export class CharacterProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

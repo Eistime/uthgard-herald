@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class CharacterProfileService {
-  
+
   private USE_MOCK_DATA = false;
   private API_URL = 'https://uthgard.org/herald/api/players';
 
@@ -85,22 +85,17 @@ export class CharacterProfileService {
    * @returns {CharacterProfile}
    */
   private getPlayerFromAPIResponse(response: Response): CharacterProfile {
-    const json = response.json(), raw = json.Raw;
-    const realm : Realm = {
-      1: Realm.Albion,
-      2: Realm.Midgard,
-      3: Realm.Hibernia
-    }[raw.Realm];
+    const json = response.json();
     const profile = new CharacterProfile(
-      <string>json.FullName,
+      <string>json.Name,
       <string>json.ClassName,
       <string>json.RaceName,
-      realm,
-      <string>raw.GuildName,
+      <Realm>json.Realm,
+      <string>json.GuildName,
       <number>json.Level,
-      <number>json.XP_Percent,
+      <number>json.xpPercent,
       <number>json.RealmRank,
-      <number>json.RP_Percent,
+      <number>json.rpPercent,
     );
     return profile;
   }
